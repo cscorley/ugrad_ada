@@ -1,0 +1,9 @@
+project Romans_Naming is
+
+   for Source_Files use ();
+
+   package Naming is
+      for Body ("romans") use "romans.adb";
+   end Naming;
+
+end Romans_Naming;

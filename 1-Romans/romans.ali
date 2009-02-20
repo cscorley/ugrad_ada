@@ -1,0 +1,63 @@
+V "GNAT Lib v4.3"
+M P W=b
+P SS ZX
+R nnnnnnnnnnnnnnnnnnnnnnvnnnvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+U romans%b		romans.adb		eb5c1235 NE SU
+W ada%s			ada.ads			ada.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+
+D ada.ads		20090208180634 9c7dd3ea
+D a-except.ads		20090208180632 ba3e26e2
+D a-finali.ads		20090208180632 9eaacebd
+D a-filico.ads		20090208180632 9299732a
+D a-inteio.ads		20090208180632 03bc737c
+D a-ioexce.ads		20090208180632 be0900a0
+D a-stream.ads		20090208180632 34aca5be
+D a-tags.ads		20090208180633 e10285b3
+D a-textio.ads		20090208180633 bc6e78fe
+D a-tiinio.ads		20090208180633 949a7272
+D a-unccon.ads		20090208180633 51e09df2
+D interfac.ads		20090208180638 a69cad5c
+D i-cstrea.ads		20090208180637 e1e064a9
+D romans.adb		20090220212026 548e19b7
+D system.ads		20090208180645 28071540
+D s-crtl.ads		20090208180639 ef997abb
+D s-exctab.ads		20090208180639 5c1c61ae
+D s-ficobl.ads		20090208180639 8bb681e5
+D s-finimp.ads		20090208180639 9449f4cb
+D s-finroo.ads		20090208180640 1408f9d1
+D s-parame.ads		20090208180641 f32e56e9
+D s-secsta.ads		20090208180641 7bae3621
+D s-soflin.ads		20090208180641 2b67bae6
+D s-stache.ads		20090208180641 257b3be8
+D s-stalib.ads		20090208180641 9ac44ca2
+D s-stoele.ads		20090208180641 1104c881
+D s-stoele.adb		20090208180641 e9998c78
+D s-stratt.ads		20090208180642 b4bf338e
+D s-traent.ads		20090208180642 bd5f2753
+D s-unstyp.ads		20090208180642 c0f9fae5
+D s-wchcon.ads		20090208180643 ab028799
+X 1 ada.ads
+16K9*Ada 19e8 14|20r6 20r19 39r17 40r17 58r17 59r17
+X 5 a-inteio.ads
+18K13*Integer_Text_IO[10|47] 14|20w23 58r21
+X 9 a-textio.ads
+50K13*Text_IO 482e16 14|20w10 39r21 40r21 59r21
+251U14*Get_Line 14|40r29
+265U14*Put_Line 14|39r29 59r29
+X 10 a-tiinio.ads
+67U14*Put 14|58r37[5|18]
+X 14 romans.adb
+22U11*Romans 22b11 61l5 61t11
+23A14 RomanType(natural)<character> 24r19
+24a9 myArray{23A14} 46r30 50r38
+32a9 userEntry{string} 40m38 41r27 46r38 50r46
+33i9 userEntryLen{positive} 40m49 46r48 48r40
+34i9 totalValue{natural} 47m17 52m33 52r47 54m33 54r47 58r41
+35i9 currValue{integer} 50m25 51r28 52r60 54r60 56r38
+36i9 prevValue{integer} 46m17 47r31 51r40 56m25
+48i21 eye{integer} 50r56
+

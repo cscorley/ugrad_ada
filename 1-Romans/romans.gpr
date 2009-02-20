@@ -1,0 +1,10 @@
+with "romans_naming.gpr";
+
+project Romans is
+
+   for Source_List_File use "romans_source_list.txt";
+   for Source_Dirs use (".");
+
+   package Naming renames Romans_Naming.Naming;
+
+end Romans;
