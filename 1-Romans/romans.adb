@@ -27,7 +27,7 @@ procedure Romans is
 						'C' => 100, 'c' => 100,
 						'D' => 500, 'd' => 500,
 						'M' => 1000, 'm' => 1000,
-				others=>0);
+						others=>0);
 	userEntry : String(1..80);
 	userEntryLen : Natural;
 	totalValue : Natural := 0;
