@@ -3,7 +3,7 @@ M P W=b
 P SS ZX
 R nnnnnnnnnnnnnnnnnnnnnnvnnnvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 
-U romans%b		romans.adb		9fe8e3b8 NE SU
+U romans%b		romans.adb		49e8dcfc NE SU
 W ada%s			ada.ads			ada.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
 W ada.tags%s		a-tags.adb		a-tags.ali
@@ -22,7 +22,7 @@ D a-tiinio.ads		20090208180633 949a7272
 D a-unccon.ads		20090208180633 51e09df2
 D interfac.ads		20090208180638 a69cad5c
 D i-cstrea.ads		20090208180637 e1e064a9
-D romans.adb		20090222060416 203ae83a
+D romans.adb		20090222061258 f63ad77e
 D system.ads		20090208180645 28071540
 D s-crtl.ads		20090208180639 ef997abb
 D s-exctab.ads		20090208180639 5c1c61ae
@@ -58,7 +58,7 @@ X 14 romans.adb
 31a9 userEntry{string} 38r17 40m38 41r27 43r49 46r57 54r41
 32i9 userEntryLen{natural} 40m49 42r20 43r59 45r46 54r54
 33i9 totalValue{natural} 44m25 48m41 48r55 50m41 50r55 55r49
-34i9 currValue{integer} 46m33 47r36 48r68 50r68 52r46
-35i9 prevValue{integer} 43m25 44r39 47r48 52m33
+34i9 currValue{natural} 46m33 47r36 48r68 50r68 52r46
+35i9 prevValue{natural} 43m25 44r39 47r48 52m33
 45i29 N{integer} 46r67
 

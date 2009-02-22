@@ -31,8 +31,8 @@ procedure Romans is
 	userEntry : String(1..80);
 	userEntryLen : Natural;
 	totalValue : Natural := 0;
-	currValue : Integer;
-	prevValue : Integer;
+	currValue : Natural;
+	prevValue : Natural;
 begin
 	loop
 		userEntry := (others => ' '); -- empty the previous read
