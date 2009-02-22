@@ -20,13 +20,13 @@ with Ada.Text_IO, Ada.Integer_Text_IO;
 
 procedure Romans is
 	type RomanType is array (Character range <>) of Natural;
-	RomanArray : RomanType('A'..'z') := ('I' => 1, 'i' => 1,
-				'V' => 5, 'v' => 5,
-				'X' => 10, 'x' => 10,
-				'L' => 50, 'l' => 50,
-				'C' => 100, 'c' => 100,
-				'D' => 500, 'd' => 500,
-				'M' => 1000, 'm' => 1000,
+	RomanArray : RomanType('A'..'z') := (	'I' => 1, 'i' => 1,
+						'V' => 5, 'v' => 5,
+						'X' => 10, 'x' => 10,
+						'L' => 50, 'l' => 50,
+						'C' => 100, 'c' => 100,
+						'D' => 500, 'd' => 500,
+						'M' => 1000, 'm' => 1000,
 				others=>0);
 	userEntry : String(1..80);
 	userEntryLen : Natural;
