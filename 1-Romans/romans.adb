@@ -34,7 +34,6 @@ procedure Romans is
 	currValueCount : Natural := 1;
 	currValue : Natural;
 	prevValue : Natural;
-	greatValue : Natural;
 	HasSubtracted : Boolean;
 	SyntaxOK : Boolean;
 begin
@@ -48,7 +47,6 @@ begin
 			SyntaxOK := true;
 			currValueCount := 1;
 			prevValue := RomanArray(userEntry(userEntryLen));
-			greatValue := RomanArray(userEntry(userEntryLen));
 			totalValue := prevValue;
 			for N in reverse 1..(userEntryLen-1) loop
 				currValue := RomanArray(userEntry(N));
