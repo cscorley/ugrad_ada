@@ -3,7 +3,7 @@
 --	Chris Corley
 --	Assignment 1 - "Romans"
 --	CS390 - Dr. Roden
---	Due February 26, 2009
+--	Due Tuesday, March 3, 2009
 
 --	Purpose:
 --	Program will ask the user to enter a Roman numeral, convert the entry to
@@ -82,7 +82,7 @@ begin
 					else
 						HasSubtracted := true;
 						totalValue := totalValue - currValue;
-						currValueCount := 1;
+						currValueCount := 0;
 					end if;
 				else
 					HasSubtracted := false;
