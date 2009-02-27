@@ -11,7 +11,7 @@
 
 --	Input:
 --	A case-insensitive sequence consisting of Roman numerals: I,V,X,L,C,D,M
---	in syntactly correct order.  Program does not check for syntax errors.
+--	in syntactly correct order.
 
 --	Output:
 --	The users entry followed by the decimal equivalent.
@@ -31,8 +31,12 @@ procedure Romans is
 	userEntry : String(1..80);
 	userEntryLen : Natural;
 	totalValue : Natural := 0;
+	currValueCount : Natural := 1;
 	currValue : Natural;
 	prevValue : Natural;
+	greatValue : Natural;
+	HasSubtracted : Boolean;
+	SyntaxOK : Boolean;
 begin
 	loop
 		userEntry := (others => ' '); -- empty the previous read
@@ -40,19 +44,51 @@ begin
 		Ada.Text_IO.Get_Line(userEntry, userEntryLen);
 		exit when userEntry(1) = '$';
 		if(userEntryLen > 0) then
+			HasSubtracted := false;
+			SyntaxOK := true;
+			currValueCount := 1;
 			prevValue := RomanArray(userEntry(userEntryLen));
+			greatValue := RomanArray(userEntry(userEntryLen));
 			totalValue := prevValue;
 			for N in reverse 1..(userEntryLen-1) loop
 				currValue := RomanArray(userEntry(N));
-				if currValue < prevValue then
-					totalValue := totalValue - currValue;
+				--broken! lolz
+				--if currValue <= greatValue and HasSubtracted then
+					--SyntaxOK := false;
+					--Ada.Text_IO.Put_Line("1");
+					--exit;
+				--end if;
+				if currValue = prevValue then
+					currValueCount := currValueCount + 1;
+					if currValueCount >= 4 then
+						SyntaxOK := false;
+						Ada.Text_IO.Put_Line("3");
+						exit;
+					end if;
 				else
+					currValueCount := 1;
+				end if;
+				if currValue < prevValue then
+					if HasSubtracted = true then
+						SyntaxOK := false;
+						Ada.Text_IO.Put_Line("2");
+						exit;
+					else
+						HasSubtracted := true;
+						totalValue := totalValue - currValue;
+					end if;
+				else
+					HasSubtracted := false;
+					prevValue := currValue;
 					totalValue := totalValue + currValue;
 				end if;
-				prevValue := currValue;
 			end loop;
-			Ada.Text_IO.Put(userEntry(1..userEntryLen));
-			Ada.Integer_Text_IO.Put(totalValue);
+			if SyntaxOK = true then
+				Ada.Text_IO.Put(userEntry(1..userEntryLen));
+				Ada.Integer_Text_IO.Put(totalValue);
+			else
+				Ada.Text_IO.Put_Line("Syntax error in your Roman numerals.");
+			end if;
 		end if;
 		Ada.Text_IO.New_Line;
 	end loop;
