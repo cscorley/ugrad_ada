@@ -82,6 +82,7 @@ begin
 					else
 						HasSubtracted := true;
 						totalValue := totalValue - currValue;
+						currValueCount := 1;
 					end if;
 				else
 					HasSubtracted := false;
