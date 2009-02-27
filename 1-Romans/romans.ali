@@ -3,7 +3,7 @@ M P W=b
 P SS ZX
 R nnnnnnnvnnnnnnnnnnnnnnvnnnvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
 
-U romans%b		romans.adb		1d2199fb NE SU
+U romans%b		romans.adb		ad4c4fcd NE SU
 W ada%s			ada.ads			ada.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
 W ada.tags%s		a-tags.adb		a-tags.ali
@@ -22,7 +22,7 @@ D a-tiinio.ads		20090208180633 949a7272
 D a-unccon.ads		20090208180633 51e09df2
 D interfac.ads		20090208180638 a69cad5c
 D i-cstrea.ads		20090208180637 e1e064a9
-D romans.adb		20090227054205 a2f39279
+D romans.adb		20090227065417 129e444f
 D system.ads		20090208180645 28071540
 D s-crtl.ads		20090208180639 ef997abb
 D s-exctab.ads		20090208180639 5c1c61ae
@@ -41,30 +41,32 @@ D s-traent.ads		20090208180642 bd5f2753
 D s-unstyp.ads		20090208180642 c0f9fae5
 D s-wchcon.ads		20090208180643 ab028799
 X 1 ada.ads
-16K9*Ada 19e8 14|19r6 19r19 43r17 44r17 57r41 64r49 73r49 86r33 87r33 89r33
-. 92r17
+16K9*Ada 19e8 14|19r6 19r19 43r17 44r17 59r49 68r49 72r49 77r49 90r33 91r33
+. 93r33 96r17
 X 5 a-inteio.ads
-18K13*Integer_Text_IO[10|47] 14|19w23 87r37
+18K13*Integer_Text_IO[10|47] 14|19w23 91r37
 X 9 a-textio.ads
-50K13*Text_IO 482e16 14|19w10 43r21 44r21 57r45 64r53 73r53 86r37 89r37 92r21
-168U14*New_Line 14|92r29
-244U14*Put 14|43r29 86r45
+50K13*Text_IO 482e16 14|19w10 43r21 44r21 59r53 68r53 72r53 77r53 90r37 93r37
+. 96r21
+168U14*New_Line 14|96r29
+244U14*Put 14|43r29 90r45
 251U14*Get_Line 14|44r29
-265U14*Put_Line 14|57r53 64r61 73r61 89r45
+265U14*Put_Line 14|59r61 68r61 72r61 77r61 93r45
 X 10 a-tiinio.ads
-67U14*Put 14|87r53[5|18]
+67U14*Put 14|91r53[5|18]
 X 14 romans.adb
-21U11*Romans 21b11 94l5 94t11
+21U11*Romans 21b11 98l5 98t11
 22A14 RomanType(natural)<character> 23r22
 23a9 RomanArray{22A14} 50r38 51r39 54r46
-31a9 userEntry{string} 42r17 44m38 45r27 50r49 51r50 54r57 86r49
-32i9 userEntryLen{natural} 44m49 46r20 50r59 51r60 53r46 86r62
-33i9 totalValue{natural} 52m25 77m49 77r63 82m41 82r55 87r57
-34i9 currValueCount{natural} 49m25 61m41 61r59 62r44 68m41
-35i9 currValue{natural} 54m33 55r36 60r36 70r36 77r76 81r54 82r68
-36i9 prevValue{natural} 50m25 52r39 60r48 70r48 81m41
-37i9 greatValue{natural} 51m25 55r49
-38b9 HasSubtracted{boolean} 47m25 55r64 71r44 76m49 80m41
-39b9 SyntaxOK{boolean} 48m25 56m41 63m49 72m49 85r28
+31a9 userEntry{string} 42r17 44m38 45r27 50r49 51r50 54r57 90r49
+32i9 userEntryLen{natural} 44m49 46r20 50r59 51r60 53r46 90r62
+33i9 totalValue{natural} 52m25 81m49 81r63 86m41 86r55 91r57
+34i9 currValueCount{natural} 49m25 56m41 56r59 57r44 63m41
+35i9 currValue{natural} 54m33 55r36 65r36 70r47 75r47 75r64 75r82 81r76 85r54
+. 86r68
+36i9 prevValue{natural} 50m25 52r39 55r48 65r48 70r64 85m41
+37i9 greatValue{natural} 51m25
+38b9 HasSubtracted{boolean} 47m25 66r44 80m49 84m41
+39b9 SyntaxOK{boolean} 48m25 58m49 67m49 71m49 76m49 89r28
 53i29 N{integer} 54r67
 

@@ -52,26 +52,32 @@ begin
 			totalValue := prevValue;
 			for N in reverse 1..(userEntryLen-1) loop
 				currValue := RomanArray(userEntry(N));
-				--broken! lolz
-				--if currValue <= greatValue and HasSubtracted then
-					--SyntaxOK := false;
-					--Ada.Text_IO.Put_Line("1");
-					--exit;
-				--end if;
+				--only 3 values can repeat
 				if currValue = prevValue then
 					currValueCount := currValueCount + 1;
 					if currValueCount >= 4 then
 						SyntaxOK := false;
-						Ada.Text_IO.Put_Line("3");
+						Ada.Text_IO.Put_Line("4");
 						exit;
 					end if;
 				else
 					currValueCount := 1;
 				end if;
 				if currValue < prevValue then
+					--only one value can be subtracted
 					if HasSubtracted = true then
 						SyntaxOK := false;
 						Ada.Text_IO.Put_Line("2");
+						exit;
+					--values subtracted must be atleast 1/10
+					elsif currValue * 10 < prevValue then
+						SyntaxOK := false;
+						Ada.Text_IO.Put_Line("1");
+						exit;
+					--values V, L, and D cannot be subtracted
+					elsif currValue = 5 or currValue = 50 or currValue = 500 then
+						SyntaxOK := false;
+						Ada.Text_IO.Put_Line("5");
 						exit;
 					else
 						HasSubtracted := true;
