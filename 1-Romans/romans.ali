@@ -1,13 +1,21 @@
 V "GNAT Lib v4.3"
 M P W=b
 P SS ZX
-R nnnnnnnvnnnnnnnnnnnnnnvnnnvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+R nnnnnnnvnnnnvnnvnnvnnnvnnnvnvnnnnnnnnvnvnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnn
 
-U romans%b		romans.adb		981c52ca NE SU
+U romans%b		romans.adb		52a24509 NE SU
 W ada%s			ada.ads			ada.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
 W ada.tags%s		a-tags.adb		a-tags.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
+W ada.text_io.enumeration_aux%s  a-tienau.adb	a-tienau.ali
+W system%s		system.ads		system.ali
+W system.img_enum_new%s	s-imenne.adb		s-imenne.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.string_ops%s	s-strops.adb		s-strops.ali
+W system.val_enum%s	s-valenu.adb		s-valenu.ali
 
 D ada.ads		20090208180634 9c7dd3ea
 D a-except.ads		20090208180632 ba3e26e2
@@ -18,17 +26,21 @@ D a-ioexce.ads		20090208180632 be0900a0
 D a-stream.ads		20090208180632 34aca5be
 D a-tags.ads		20090208180633 e10285b3
 D a-textio.ads		20090208180633 bc6e78fe
+D a-tienau.ads		20090208180633 671c7a9a
+D a-tienio.ads		20090208180633 213fedba
+D a-tienio.adb		20090208180633 ba330dab
 D a-tiinio.ads		20090208180633 949a7272
 D a-unccon.ads		20090208180633 51e09df2
 D interfac.ads		20090208180638 a69cad5c
 D i-cstrea.ads		20090208180637 e1e064a9
-D romans.adb		20090227070255 27ce5948
+D romans.adb		20090302083214 ed704e8b
 D system.ads		20090208180645 28071540
 D s-crtl.ads		20090208180639 ef997abb
 D s-exctab.ads		20090208180639 5c1c61ae
 D s-ficobl.ads		20090208180639 8bb681e5
 D s-finimp.ads		20090208180639 9449f4cb
 D s-finroo.ads		20090208180640 1408f9d1
+D s-imenne.ads		20090208180640 97a402ea
 D s-parame.ads		20090208180641 f32e56e9
 D s-secsta.ads		20090208180641 7bae3621
 D s-soflin.ads		20090208180641 2b67bae6
@@ -37,35 +49,52 @@ D s-stalib.ads		20090208180641 9ac44ca2
 D s-stoele.ads		20090208180641 1104c881
 D s-stoele.adb		20090208180641 e9998c78
 D s-stratt.ads		20090208180642 b4bf338e
+D s-strops.ads		20090208180642 845f72d2
+D s-sopco3.ads		20090208180641 72ce1063
+D s-sopco4.ads		20090208180641 bc112723
+D s-sopco5.ads		20090208180641 191315e8
 D s-traent.ads		20090208180642 bd5f2753
 D s-unstyp.ads		20090208180642 c0f9fae5
+D s-valenu.ads		20090208180642 9e547a01
 D s-wchcon.ads		20090208180643 ab028799
 X 1 ada.ads
-16K9*Ada 19e8 14|19r6 19r19 42r17 43r17 58r49 68r49 73r49 78r49 92r33 93r33
-. 95r33 98r17
+16K9*Ada 19e8 17|19r6 19r19 20r5 20r18 26r33
 X 5 a-inteio.ads
-18K13*Integer_Text_IO[10|47] 14|19w23 93r37
+18K13*Integer_Text_IO[13|47] 17|19w23 20r22
 X 9 a-textio.ads
-50K13*Text_IO 482e16 14|19w10 42r21 43r21 58r53 68r53 73r53 78r53 92r37 95r37
-. 98r21
-168U14*New_Line 14|98r29
-244U14*Put 14|42r29 92r45
-251U14*Get_Line 14|43r29
-265U14*Put_Line 14|58r61 68r61 73r61 78r61 95r45
-X 10 a-tiinio.ads
-67U14*Put 14|93r53[5|18]
-X 14 romans.adb
-21U11*Romans 21b11 100l5 100t11
-22A14 RomanType(natural)<character> 23r22
-23a9 RomanArray{22A14} 49r38 52r46
-31a9 userEntry{string} 41r17 43m38 44r27 49r49 52r57 92r49
-32i9 userEntryLen{natural} 43m49 45r20 49r59 51r46 92r62
-33i9 totalValue{natural} 50m25 82m49 82r63 88m41 88r55 93r57
-34i9 currValueCount{natural} 48m25 55m41 55r59 56r44 62m41 83m49
-35i9 currValue{natural} 52m33 54r36 64r36 71r47 76r47 76r64 76r82 82r76 87r54
-. 88r68
-36i9 prevValue{natural} 49m25 50r39 54r48 64r48 71r64 87m41
-37b9 HasSubtracted{boolean} 46m25 66r44 81m49 86m41
-38b9 SyntaxOK{boolean} 47m25 57m49 67m49 72m49 77m49 91r28
-51i29 N{integer} 52r67
+50K13*Text_IO 482e16 17|19w10 20r9 26r37
+168U14*New_Line 17|98r17
+244U14*Put 17|50r17 92r33
+251U14*Get_Line 17|51r17
+265U14*Put_Line 17|95r33
+X 11 a-tienio.ads
+46E9 Enum 17|26r60
+48k21*Enumeration_IO 77e31 17|26r45
+67U14 Get 17|57r34[26] 62r42[26]
+X 13 a-tiinio.ads
+67U14*Put 17|93r33[5|18]
+X 17 romans.adb
+22U11*Romans 22b11 100l5 100t11
+24E14 RomanEnum 24e42 25r34 26r68 45r32
+24n28 I{24E14} 27r41
+24n30 V{24E14} 28r49 78r64
+24n32 X{24E14} 29r49
+24n34 L{24E14} 30r49 79r64
+24n36 C{24E14} 31r49
+24n38 D{24E14} 32r49 80r64
+24n40 M{24E14} 33r49
+25A14 RomanType(natural)<24E14> 27r23
+26K17 Roman_IO[11|48] 57r25 62r33
+27a9 Roman_Value{25A14} 60r39 77r52 77r82 84r68 88r68
+42a9 userEntry{string} 49r17 51m26 52r27 57r43 62r51 92r37
+43i9 userEntryLen{natural} 51m37 53r21 57r53 61r46 92r50
+43i23 totalValue{natural} 60m25 84m41 84r55 88m41 88r55 93r37
+43i35 currValueCount{natural} 56m25 66m41 66r59 67r45 72m41 83m41
+44b9 HasSubtracted{boolean} 54m25 76r52 82m41 86m41
+44b24 SyntaxOK{boolean} 55m25 68m49 75m41 81m41 91r28
+45e9 currValue{24E14} 62m64 65r37 74r37 77r64 78r52 79r52 80r52 84r80 87r54
+. 88r80
+45e20 prevValue{24E14} 57m67 60r51 65r49 74r49 77r94 87m41
+46i9 tempIndex{positive} 57m77 62m74
+61i29 N{integer} 62r61
 
