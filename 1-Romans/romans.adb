@@ -6,12 +6,12 @@
 --	Due Tuesday, March 3, 2009
 
 --	Purpose:
---	Program will ask the user to enter a Roman numeral, convert the entry to
---	decimal and print the result.  Will exit upon "$" from user.
+--	Program will ask the user to enter a Roman numeral, convert the entry to decimal and
+--	print the result.  Will exit upon "$" from user.
 
 --	Input:
---	A case-insensitive sequence consisting of Roman numerals: I,V,X,L,C,D,M
---	in syntactly correct order.
+--	A case-insensitive sequence consisting of Roman numerals: I,V,X,L,C,D,M in syntactly
+--	correct order.
 
 --	Output:
 --	The users entry followed by the decimal equivalent.
@@ -37,77 +37,80 @@ procedure Romans is
 	tempIndex : Positive;
 begin
 	loop
-		userEntry := (others => ' '); -- empty the previous read
+	userEntry := (others => ' '); -- empty the previous read
 
-		Put("Please enter your Roman numeral ($ to quit): ");
-		Get_Line(userEntry, length);
-		exit when userEntry(1) = '$';
+	Put("Please enter your Roman numeral ($ to quit): ");
+	Get_Line(userEntry, length);
+	exit when userEntry(1) = '$';
 
-		if (length > 0) then
-			-- reset for new read
-			hasSubtracted := false;
-			syntaxOK := true;
-			repeatsCounter := 1;
+	if (length > 0) then
+		-- reset for new read
+		hasSubtracted := false;
+		syntaxOK := true;
+		repeatsCounter := 1;
 
-			-- initialize the smallest digit to set a previousNumeral
-			--	for the loop and set the start totalValue to that.
-			-- must concatenate since Get requires String, but
-			--	userEntry(length) returns a Character value.
-			Roman_IO.Get("" & userEntry(length),previousNumeral,tempIndex);
-			totalValue := Roman_Value(previousNumeral);
+		-- initialize the smallest digit to set a previousNumeral for the loop and set the
+		--\	starting totalValue to that.  Must concatenate since Get requires String.
+		Roman_IO.Get("" & userEntry(length),previousNumeral,tempIndex);
+		totalValue := Roman_Value(previousNumeral);
 
-			-- begin reading right to left.
-			for N in reverse 1..(length-1) loop
-				-- must concatenate since Get requires String, but
-				--	userEntry(N) returns a Character value.
-				Roman_IO.Get("" & userEntry(N),currentNumeral,tempIndex);
+		-- begin reading right to left.
+		for N in reverse 1..(length-1) loop
+			-- must concatenate since Get requires String.
+			Roman_IO.Get("" & userEntry(N),currentNumeral,tempIndex);
 
-				-- insure no repeating numerals, will total value
-				--	later.  ie, IIII should be written IV.
-				if (currentNumeral = previousNumeral) then
-					repeatsCounter := repeatsCounter + 1;
-					if (repeatsCounter >= 4) then
-						syntaxOK := false;
-						exit;
-					end if;
-				else
-					repeatsCounter := 1;
-				end if;
-
-				-- subtract if the left value < right value
-				if (currentNumeral < previousNumeral) then
-					-- assume bad syntax incase exit statement
-					--	makes us leave the loop.
-					syntaxOK := false;
-					exit when (hasSubtracted
-						or Roman_Value(currentNumeral) * 10 < Roman_Value(previousNumeral)
-						or currentNumeral = V
-						or currentNumeral = L
-						or currentNumeral = D);
-					-- if we made it this far, it must be OK.
-					syntaxOK := true;
-
-
-					hasSubtracted := true;
-
-					repeatsCounter := 0;
-					totalValue := totalValue - Roman_Value(currentNumeral);
-				else
-					hasSubtracted := false;
-
-					previousNumeral := currentNumeral;
-					totalValue := totalValue + Roman_Value(currentNumeral);
-				end if;
-			end loop;
-
-			-- decide on what to print depending on flag
-			if syntaxOK then
-				Put(userEntry(1..length));
-				Put(totalValue);
+			-- insure no >3 repeating numerals or any of 5x10^n numerals (V,L,D).
+			--	ie, IIII should be written IV. VV should be written X.
+			if (currentNumeral = previousNumeral) then
+				repeatsCounter := repeatsCounter + 1;
+				-- assume bad syntax incase exit statement makes us leave the loop.
+				syntaxOK := false;
+				exit when ( repeatsCounter >= 4
+					or ( repeatsCounter >= 2 and ( 	currentNumeral = V
+									or currentNumeral = L
+									or currentNumeral = D)));
+				-- if we made it this far, it must be OK.
+				syntaxOK := true;
 			else
-				Put_Line("Syntax error in your Roman numerals.");
+				repeatsCounter := 1;
 			end if;
+
+			-- subtract if the left value < right value
+			if (currentNumeral < previousNumeral) then
+				-- assume bad syntax incase exit statement makes us leave the loop.
+				syntaxOK := false;
+				exit when (hasSubtracted
+					or Roman_Value(currentNumeral) * 10 < Roman_Value(previousNumeral)
+					or currentNumeral = V
+					or currentNumeral = L
+					or currentNumeral = D);
+				-- if we made it this far, it must be OK.
+				syntaxOK := true;
+				hasSubtracted := true;
+
+				totalValue := totalValue - Roman_Value(currentNumeral);
+
+				-- since we are subtracting, we don't change the previousNumeral.
+				--\	But because of this, we must set repeatsCounter to 0 so
+				--\	the value being subtracted isn't considered apart of it.
+				--\	ie, XXXX is invalid, but both XXX and XXXIX are.
+				repeatsCounter := 0;
+			else
+				hasSubtracted := false;
+
+				previousNumeral := currentNumeral;
+				totalValue := totalValue + Roman_Value(currentNumeral);
+			end if;
+		end loop;
+
+		-- decide on what to print depending on flag
+		if syntaxOK then
+			Put(userEntry(1..length));
+			Put(totalValue);
+		else
+			Put_Line("Syntax error in your Roman numerals.");
 		end if;
-		New_Line;
+	end if;
+	New_Line;
 	end loop;
 end Romans;
