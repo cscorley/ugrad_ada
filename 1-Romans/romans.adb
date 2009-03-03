@@ -23,7 +23,7 @@ procedure Romans is
 	type Roman_Enum is (I,V,X,L,C,D,M);
 	type Roman_Type is array (Roman_Enum) of Natural;
 	package Roman_IO is new Ada.Text_IO.Enumeration_IO(Enum => Roman_Enum);
-	-- this is going to end up very painful for a user who enters a non-roman numeral.
+	-- this is going to end up very painful for a user (and me) who enters a non-roman numeral
 	Roman_Value : Roman_Type := (	I => 1,
 					V => 5,
 					X => 10,
