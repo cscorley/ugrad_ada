@@ -30,7 +30,7 @@ procedure Romans is
 					C => 100,
 					D => 500,
 					M => 1000);
-	userEntry : String(1..34); -- MMMCMDDDCDCCCXCLLLXLXXXIXVVVIVIII
+	userEntry : String(1..34); -- MMMCMDCDCCCXCLXLXXXIXVIVIII
 	length, totalValue, repeatsCounter : Natural;
 	hasSubtracted, syntaxOK : Boolean;
 	currentNumeral, previousNumeral : Roman_Enum;
@@ -93,8 +93,13 @@ begin
 				-- since we are subtracting, we don't change the previousNumeral.
 				--\	But because of this, we must set repeatsCounter to 0 so
 				--\	the value being subtracted isn't considered apart of it.
-				--\	ie, XXXX is invalid, but both XXX and XXXIX are.
-				repeatsCounter := 0;
+				--\	Also, repeats of 5 are not included in this rule.
+				--\	ie, VIV should be written IX
+				--\	XXXX is invalid, but both XXX and XXXIX are.
+				if (previousNumeral /= V and previousNumeral /= L
+							 and previousNumeral /= D) then
+					repeatsCounter := 0;
+				end if;
 			else
 				hasSubtracted := false;
 
