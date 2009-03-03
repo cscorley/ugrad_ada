@@ -3,7 +3,7 @@ M P W=b
 P SS ZX
 R nnnnnnnvnnnnvnnvnnvnnnvnnnvnvnnnnnnnnvnvnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnn
 
-U romans%b		romans.adb		52a446f6 NE SU
+U romans%b		romans.adb		4fcefbdd NE SU
 W ada%s			ada.ads			ada.ali
 W ada.exceptions%s	a-except.adb		a-except.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -33,7 +33,7 @@ D a-tiinio.ads		20090208180633 949a7272
 D a-unccon.ads		20090208180633 51e09df2
 D interfac.ads		20090208180638 a69cad5c
 D i-cstrea.ads		20090208180637 e1e064a9
-D romans.adb		20090303151315 ed764d74
+D romans.adb		20090303174555 f01cf05f
 D system.ads		20090208180645 28071540
 D s-crtl.ads		20090208180639 ef997abb
 D s-exctab.ads		20090208180639 5c1c61ae
@@ -63,39 +63,39 @@ X 5 a-inteio.ads
 18K13*Integer_Text_IO[13|47] 17|19w23 20r22
 X 9 a-textio.ads
 50K13*Text_IO 482e16 17|19w10 20r9 25r37
-168U14*New_Line 17|118r9
-244U14*Put 17|42r9 112r25
-251U14*Get_Line 17|43r9
-265U14*Put_Line 17|115r25
+168U14*New_Line 17|120r9
+244U14*Put 17|43r9 114r25
+251U14*Get_Line 17|44r9
+265U14*Put_Line 17|117r25
 X 11 a-tienio.ads
 46E9 Enum 17|25r60
 48k21*Enumeration_IO 77e31 17|25r45
-67U14 Get 17|54r26[25] 60r34[25]
+67U14 Get 17|55r26[25] 61r34[25]
 X 13 a-tiinio.ads
-67U14*Put 17|113r25[5|18]
+67U14*Put 17|115r25[5|18]
 X 17 romans.adb
-22U11*Romans 22b11 120l5 120t11
-23E14 Roman_Enum 23e43 24r35 25r68 36r43
-23n29 I{23E14} 26r41
-23n31 V{23E14} 27r41 69r90 84r61 99r56
-23n33 X{23E14} 28r41
-23n35 L{23E14} 29r41 70r93 85r61 99r81
-23n37 C{23E14} 30r41
-23n39 D{23E14} 31r41 71r93 86r61 99r106
-23n41 M{23E14} 32r41
-24A14 Roman_Type(natural)<23E14> 26r23
-25K17 Roman_IO[11|48] 54r17 60r25
-26a9 Roman_Value{24A14} 55r31 83r44 83r79 91r60 106r60
-33a9 userEntry{string} 40r9 43m18 44r19 54r35 60r43 112r29
-34i9 length{natural} 43m29 46r13 54r45 58r38 112r42
-34i17 totalValue{natural} 55m17 91m33 91r47 106m33 106r47 113r29
-34i29 repeatsCounter{natural} 50m17 65m33 65r51 68r45 69r46 75m33 100m41
-35b9 hasSubtracted{boolean} 48m17 82r44 89m33 103m33
-35b24 syntaxOK{boolean} 49m17 67m33 73m33 81m33 88m33 111r20
-36e9 currentNumeral{23E14} 60m56 64r29 69r73 70r76 71r76 79r29 83r56 84r44
-. 85r44 86r44 91r72 105r52 106r72
-36e25 previousNumeral{23E14} 54m53 55r43 64r46 79r46 83r91 99r37 99r62 99r87
-. 105m33
-37i9 tempIndex{positive} 54m69 60m71
-58i21 N{integer} 60r53
+22U11*Romans 22b11 122l5 122t11
+23E14 Roman_Enum 23e43 24r35 25r68 37r43
+23n29 I{23E14} 27r41
+23n31 V{23E14} 28r41 70r90 85r61 100r56
+23n33 X{23E14} 29r41
+23n35 L{23E14} 30r41 71r93 86r61 100r81
+23n37 C{23E14} 31r41
+23n39 D{23E14} 32r41 72r93 87r61 101r81
+23n41 M{23E14} 33r41
+24A14 Roman_Type(natural)<23E14> 27r23
+25K17 Roman_IO[11|48] 55r17 61r25
+27a9 Roman_Value{24A14} 56r31 84r44 84r79 92r60 108r60
+34a9 userEntry{string} 41r9 44m18 45r19 45r29 55r35 59r34 61r43 114r29
+35i9 length{natural} 44m29 47r13 55r45 59r52 114r42
+35i17 totalValue{natural} 56m17 92m33 92r47 108m33 108r47 115r29
+35i29 repeatsCounter{natural} 51m17 66m33 66r51 69r45 70r46 76m33 102m41
+36b9 hasSubtracted{boolean} 49m17 83r44 90m33 105m33
+36b24 syntaxOK{boolean} 50m17 68m33 74m33 82m33 89m33 113r20
+37e9 currentNumeral{23E14} 61m56 65r29 70r73 71r76 72r76 80r29 84r56 85r44
+. 86r44 87r44 92r72 107r52 108r72
+37e25 previousNumeral{23E14} 55m53 56r43 65r46 80r46 84r91 100r37 100r62
+. 101r62 107m33
+38i9 tempIndex{positive} 55m69 61m71
+59i21 N{integer} 61r53
 
