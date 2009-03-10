@@ -22,7 +22,6 @@ use Ada.Text_IO, Ada.Integer_Text_IO;
 procedure SubRomans is
 	type Roman_Enum is (I,V,X,L,C,D,M);
 	type Roman_Type is array (Roman_Enum) of Natural;
-	package Roman_IO is new Ada.Text_IO.Enumeration_IO(Enum => Roman_Enum);
 	Roman_Value : constant Roman_Type := (	I => 1,
 						V => 5,
 						X => 10,
@@ -30,8 +29,8 @@ procedure SubRomans is
 						C => 100,
 						D => 500,
 						M => 1000);
-	userEntry : String(1..80);
-	length : Natural;
+
+	package Roman_IO is new Ada.Text_IO.Enumeration_IO(Enum => Roman_Enum);
 
 
 	-- Checks the given character if it is in the uppercase range and a roman numeral.
@@ -44,6 +43,54 @@ procedure SubRomans is
 				return false;
 		end case;
 	end isUpperCase;
+
+
+	-- Prints an appropriate error message depending on value received.
+	function printError (errorNumber : in Natural) return Boolean is
+	begin
+		case errorNumber is
+			when 1 =>
+				Put("Invalid numeral.");
+			when 2 =>
+				Put("Repeating numerals over 3 long are not allowed.");
+			when 3 =>
+				Put("Doubles of V, L, or D are not allowed.");
+			when 4 =>
+				Put("Cannot subtract two numerals in a row.");
+			when 5 =>
+				Put("Cannot subtract numeral from one over 10 times its size.");
+			when 6 =>
+				Put("Cannot subtract numerals V, L, or D from another numeral.");
+			when others =>
+				return false;
+		end case;
+		return true;
+	end printError;
+
+
+	-- Converts the string to the decimal equivalent
+	function RomansToDecimal (B : String; length : Positive) return Positive is
+		currNumeral, prevNumeral : Roman_Enum;
+		hasSubtracted : Boolean := false;
+		repeatsCounter : Natural := 1;
+		tempIndex, totalValue : Natural;
+	begin
+		Roman_IO.Get("" & B(length),prevNumeral,tempIndex);
+		totalValue := Roman_Value(prevNumeral);
+
+		for N in reverse userEntry'First..(length-1) loop
+
+			Roman_IO.Get("" & userEntry(N),currNumeral,tempIndex);
+			if (currNumeral < prevNumeral) then
+				totalValue := totalValue - Roman_Value(currNumeral);
+			else
+				prevNumeral := currNumeral;
+				totalValue := totalValue + Roman_Value(currNumeral);
+			end if;
+		end loop;
+		return totalValue;
+	end RomansToDecimal;
+
 
 	-- Validates the string given and returns error number for later lookup on detection.
 	function isValid (A : String; length : Natural) return Natural is
@@ -93,52 +140,8 @@ procedure SubRomans is
 		return 0;
 	end isValid;
 
-	-- Converts the string to the decimal equivalent
-	function RomansToDecimal (B : String; length : Positive) return Positive is
-		currNumeral, prevNumeral : Roman_Enum;
-		hasSubtracted : Boolean := false;
-		repeatsCounter : Natural := 1;
-		tempIndex, totalValue : Natural;
-	begin
-		Roman_IO.Get("" & B(length),prevNumeral,tempIndex);
-		totalValue := Roman_Value(prevNumeral);
-
-		for N in reverse userEntry'First..(length-1) loop
-
-			Roman_IO.Get("" & userEntry(N),currNumeral,tempIndex);
-			if (currNumeral < prevNumeral) then
-				totalValue := totalValue - Roman_Value(currNumeral);
-			else
-				prevNumeral := currNumeral;
-				totalValue := totalValue + Roman_Value(currNumeral);
-			end if;
-		end loop;
-		return totalValue;
-	end RomansToDecimal;
-
-	-- Prints an appropriate error message depending on value received.
-	function printError (errorNumber : in Natural) return Boolean is
-	begin
-		case errorNumber is
-			when 1 =>
-				Put("Invalid numeral.");
-			when 2 =>
-				Put("Repeating numerals over 3 long are not allowed.");
-			when 3 =>
-				Put("Doubles of V, L, or D are not allowed.");
-			when 4 =>
-				Put("Cannot subtract two numerals in a row.");
-			when 5 =>
-				Put("Cannot subtract numeral from one over 10 times its size.");
-			when 6 =>
-				Put("Cannot subtract numerals V, L, or D from another numeral.");
-			when others =>
-				return false;
-		end case;
-		return true;
-	end printError;
-
-
+	userEntry : String(1..80);
+	length : Natural;
 begin -- main procedure SubRomans
 	loop
 		Put("Please enter your Roman numeral ($ to quit): ");
