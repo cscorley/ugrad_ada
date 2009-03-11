@@ -82,18 +82,6 @@ procedure SubRomans is
 		return totalValue;
 	end RomansToDecimal;
 
-
-
-
-
-
-
-
-
-
-
-
-
 	-- isValid: Validates the string given and returns error number for later lookup on detection
 	-- Input: String: users input, Positive: length of input
 	-- Output: Natural: error code of >= 1 if string is invalid, error code of 0 if valid.
