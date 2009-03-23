@@ -30,22 +30,25 @@ package body Rational_Numbers is
 
 	function "+" (X, Y: Rational) return Rational is
 	begin
-		return X;
+		return Simplify(((X.Num*Y.Denom)+(Y.Num * X.Denom), (X.Denom*Y.Denom)));
 	end "+"; --binary
 
 	function "-" (X, Y: Rational) return Rational is
 	begin
-		return X;
+		return Simplify(((X.Num*Y.Denom)-(Y.Num * X.Denom), (X.Denom*Y.Denom)));
 	end "-"; --binary
 
 	function "*" (X, Y: Rational) return Rational is
 	begin
-		return X;
+		return Simplify(((X.Num*Y.Num), (X.Denom*Y.Denom)));
 	end "*";
 
 	function "/" (X, Y: Rational) return Rational is
 	begin
-		return X;
+		if (Y.Num /= 0) then
+			return Simplify(((X.Num*Y.Denom), (X.Denom*Y.Num)));
+		end if;
+		return (0,1);
 	end "/";
 
 	function "/" (X: Integer; Y: Positive) return Rational is -- constructor
@@ -64,13 +67,19 @@ package body Rational_Numbers is
 	end Denominator;
 
 	function Simplify(X: Rational) return Rational is
+		divisor : Integer;
 	begin
-		return X;
+		divisor := GCD(X.Num, X.Denom);
+		return (X.Num / divisor, X.Denom / divisor);
 	end Simplify;
 
 	function GCD (X,Y: Integer) return Integer is
 	begin
-		return 1;
+		if Y = 0 then
+			return X;
+		else
+			return GCD(Y, X mod Y);
+		end if;
 	end GCD;
 
 end Rational_Numbers;

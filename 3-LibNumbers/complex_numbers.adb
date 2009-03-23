@@ -15,12 +15,20 @@
 package body Complex_Numbers is
 	function "+" (X: Complex) return Complex is
 	begin
-		return X;
+		if X.Re < 0.0 and X.Im < 0.0 then
+			return (-X.Re, -X.Im);
+		elsif X.Re > 0.0 and X.Im < 0.0 then
+			return (X.Re, -X.Im);
+		elsif X.Re < 0.0 and X.Im > 0.0 then
+			return (-X.Re, X.Im);
+		else
+			return X;
+		end if;
 	end "+"; --unary
 
 	function "-" (X: Complex) return Complex is
 	begin
-		return X;
+		return (-X.Re, -X.Im);
 	end "-"; --unary
 
 	function "+" (X, Y: Complex) return Complex is
@@ -35,12 +43,18 @@ package body Complex_Numbers is
 
 	function "*" (X, Y: Complex) return Complex is
 	begin
-		return X;
+		return (X.Re*Y.Re - X.Im*Y.Im, X.Im*Y.Re + X.Re*Y.Im);
 	end "*";
 
 	function "/" (X, Y: Complex) return Complex is
+		NewRe, NewIm : Float;
 	begin
-		return X;
+		if Y /= (0.0,0.0) then
+			NewRe := (X.Re*Y.Re + X.Im*Y.Im)/(Y.Re*Y.Re + Y.Im*Y.Im);
+			NewIm := (X.Im*Y.Re - X.Re*Y.Im)/(Y.Re*Y.Re + Y.Im*Y.Im);
+			return (NewRe, NewIm);
+		end if;
+		return (0.0,0.0);
 	end "/";
 
 	function Cons (R,I: Float) return Complex is

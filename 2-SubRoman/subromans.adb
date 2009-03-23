@@ -118,9 +118,9 @@ procedure SubRomans is
 				elsif (Roman_Enum'Pos(prevNumeral) > Roman_Enum'Pos(currNumeral) + 2) then
 					return 5;	-- cannot subtract when curr*10 < prev
 				elsif (currNumeral = V or currNumeral = L or currNumeral = D) then
-					return 6;	--cannot subtract numerals of 5*(10^n) | n=1,2,3...
+					return 6;	--cannot subtract numerals of 5*(10^n) | n=1,2,3..
 				elsif (prevNumeral /= V and prevNumeral /= L and prevNumeral /= D) then
-					repeatsCounter := 0;	-- reset for numerals like XIX but not VIV.
+					repeatsCounter := 0; -- reset for numerals like XIX but not VIV.
 				end if;
 				hasSubtracted := true;
 			else
