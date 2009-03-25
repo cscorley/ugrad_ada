@@ -19,15 +19,22 @@ procedure Driver is
 	AP, BP, CP : Polar;
 	D, E, F : Rational;
 begin
-	A := Cons (1.0,1.0);
-	B := Cons (2.0,1.0);
+	A := Cons (0.63,1.337);
+	B := Cons (0.50,1.0);
 	C := Cons (3.0,2.0);
 	AP := ToPolar(A);
 	BP := ToPolar(B);
 	CP := ToPolar(C);
 	Print(A); New_Line;
+	Print(ToComplex(AP)); New_Line;
+	Print(A+B); New_Line;
+	Print(ToComplex(AP+BP)); New_Line;
 	Print(A-B); New_Line;
-	Print(AP); New_Line;
+	Print(ToComplex(AP-BP)); New_Line;
+	Print(A*B); New_Line;
+	Print(ToComplex(AP*BP)); New_Line;
+	Print(A/B); New_Line;
+	Print(ToComplex(AP/BP)); New_Line;
 	D := 4/5;
 	E := 5/25;
 	F := D + E;

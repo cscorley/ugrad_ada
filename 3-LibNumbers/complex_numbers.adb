@@ -19,15 +19,7 @@ package body Complex_Numbers is
 	-- Complex functions
 	function "+" (X: Complex) return Complex is
 	begin
-		if X.Re < 0.0 and X.Im < 0.0 then
-			return (-X.Re, -X.Im);
-		elsif X.Re > 0.0 and X.Im < 0.0 then
-			return (X.Re, -X.Im);
-		elsif X.Re < 0.0 and X.Im > 0.0 then
-			return (-X.Re, X.Im);
-		else
-			return X;
-		end if;
+		return X;
 	end "+"; --unary
 
 	function "-" (X: Complex) return Complex is
@@ -94,20 +86,13 @@ package body Complex_Numbers is
 			Put(" + ");
 		end if;
 		Put(Im_Part(X));
+		Put("i");
 	end Print;
 
 	-- Polar functions
 	function "+" (X: Polar) return Polar is
 	begin
-		if X.R < 0.0 and X.Theta < 0.0 then
-			return (-X.R, -X.Theta);
-		elsif X.R > 0.0 and X.Theta < 0.0 then
-			return (X.R, -X.Theta);
-		elsif X.R < 0.0 and X.Theta > 0.0 then
-			return (-X.R, X.Theta);
-		else
-			return X;
-		end if;
+		return X;
 	end "+"; --unary
 
 	function "-" (X: Polar) return Polar is
@@ -117,28 +102,22 @@ package body Complex_Numbers is
 
 	function "+" (X, Y: Polar) return Polar is
 	begin
-		return (X.R + Y.R, X.Theta + Y.Theta);
+		return (ToPolar(ToComplex(X) + ToComplex(Y)));
 	end "+"; -- binary
 
 	function "-" (X, Y: Polar) return Polar is
 	begin
-		return (X.R - Y.R, X.Theta - Y.Theta);
+		return (ToPolar(ToComplex(X) - ToComplex(Y)));
 	end "-"; --binary
 
 	function "*" (X, Y: Polar) return Polar is
 	begin
-		return (X.R*Y.R - X.Theta*Y.Theta, X.Theta*Y.R + X.R*Y.Theta);
+		return (X.R * Y.R, X.Theta + Y.Theta);
 	end "*";
 
 	function "/" (X, Y: Polar) return Polar is
-		NewR, NewTheta : Float;
 	begin
-		if Y /= (0.0,0.0) then
-			NewR := (X.R*Y.R + X.Theta*Y.Theta)/(Y.R*Y.R + Y.Theta*Y.Theta);
-			NewTheta := (X.Theta*Y.R - X.R*Y.Theta)/(Y.R*Y.R + Y.Theta*Y.Theta);
-			return (NewR, NewTheta);
-		end if;
-		return (0.0,0.0);
+		return (X.R / Y.R, X.Theta - Y.Theta);
 	end "/";
 
 	function Cons (R,Theta: Float) return Polar is
@@ -163,17 +142,18 @@ package body Complex_Numbers is
 
 	function Absolute (X: Polar) return Float is
 	begin
-		return Sqrt((X.R*X.R) + (X.Theta*X.Theta));
+		return X.R;
 	end Absolute;
+
 	procedure Print(X: Polar) is
 	begin
 		Put(R_Part(X));
-		if Theta_Part(X) < 0.0 then
-			Put(" ");
-		else
-			Put(" + ");
-		end if;
+		Put("(cos");
 		Put(Theta_Part(X));
+		Put(" + i*sin");
+		Put(Theta_Part(X));
+		Put(")");
+
 	end Print;
 
 
