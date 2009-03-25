@@ -10,22 +10,42 @@
 --	Input:
 
 --	Output:
+with Ada.Numerics;
 
 package Complex_Numbers is
+	use Ada.Numerics;
+
 	type Complex is private;
 	type Polar is private;
 	I: constant Complex;
+
+	-- Complex functions
 	function "+" (X: Complex) return Complex;
 	function "-" (X: Complex) return Complex;
 	function "+" (X, Y: Complex) return Complex;
 	function "-" (X, Y: Complex) return Complex;
 	function "*" (X, Y: Complex) return Complex;
 	function "/" (X, Y: Complex) return Complex;
-	function Cons (R,I: Float) return Complex;
+	function Cons (Re,Im: Float) return Complex;
 	function Re_Part (X: Complex) return Float;
 	function Im_Part (X: Complex) return Float;
 	function Conjugate (X: Complex) return Complex;
 	function Absolute (X: Complex) return Float;
+	procedure Print(X: Complex);
+	-- Polar functions
+	function "+" (X: Polar) return Polar;
+	function "-" (X: Polar) return Polar;
+	function "+" (X, Y: Polar) return Polar;
+	function "-" (X, Y: Polar) return Polar;
+	function "*" (X, Y: Polar) return Polar;
+	function "/" (X, Y: Polar) return Polar;
+	function Cons (R,Theta: Float) return Polar;
+	function R_Part (X: Polar) return Float;
+	function Theta_Part (X: Polar) return Float;
+	function Conjugate (X: Polar) return Polar;
+	function Absolute (X: Polar) return Float;
+	procedure Print(X: Polar);
+	-- Conversion functions
 	function ToPolar (X: Complex) return Polar;
 	function ToComplex (X: Polar) return Complex;
 private
@@ -35,7 +55,8 @@ private
 	end record;
 	type Polar is
 	record
-		R, Theta: Float;
+		R: Float;
+		Theta: Float range 0.0..2.0*Pi;
 	end record;
 	I: constant Complex := (0.0, 1.0);
 end Complex_Numbers;

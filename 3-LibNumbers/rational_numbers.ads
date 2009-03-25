@@ -24,6 +24,7 @@ package Rational_Numbers is
 	function Numerator (X: Rational) return Integer;
 	function Denominator (X: Rational) return Positive;
 	function Simplify(X: Rational) return Rational;
+	procedure Print(X : Rational);
 private
 	type Rational is
 	record

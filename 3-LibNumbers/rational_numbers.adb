@@ -11,7 +11,10 @@
 
 --	Output:
 
+
+with Ada.Text_IO, Ada.Integer_Text_IO;
 package body Rational_Numbers is
+	use Ada.Text_IO, Ada.Integer_Text_IO;
 	function "+" (X: Rational) return Rational is
 	begin
 		if X.Num < 0 then
@@ -48,7 +51,7 @@ package body Rational_Numbers is
 		if (Y.Num /= 0) then
 			return Simplify(((X.Num*Y.Denom), (X.Denom*Y.Num)));
 		end if;
-		return (0,1);
+		return (999999999,1);
 	end "/";
 
 	function "/" (X: Integer; Y: Positive) return Rational is -- constructor
@@ -81,5 +84,10 @@ package body Rational_Numbers is
 			return GCD(Y, X mod Y);
 		end if;
 	end GCD;
-
+	procedure Print (X: Rational) is
+	begin
+		Put(Numerator(X));
+		Put("/");
+		Put(Denominator(X));
+	end Print;
 end Rational_Numbers;
