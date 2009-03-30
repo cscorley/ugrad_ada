@@ -43,12 +43,10 @@ package body Complex_Numbers is
 	end "*";
 
 	function "/" (X, Y: Complex) return Complex is
-		NewRe, NewIm : Float;
+		Div : Float := Y.Re**2 + Y.Im**2;
 	begin
 		if Y /= (0.0,0.0) then
-			NewRe := (X.Re*Y.Re + X.Im*Y.Im)/(Y.Re*Y.Re + Y.Im*Y.Im);
-			NewIm := (X.Im*Y.Re - X.Re*Y.Im)/(Y.Re*Y.Re + Y.Im*Y.Im);
-			return (NewRe, NewIm);
+			return ((X.Re*Y.Re + X.Im*Y.Im)/Div, (X.Im*Y.Re - X.Re*Y.Im)/Div);
 		end if;
 		return (0.0,0.0);
 	end "/";
@@ -163,6 +161,9 @@ package body Complex_Numbers is
 		--R= Absolute(X)
 		--Theta = arctan(X.Im / X.Re)
 		-- watch for special cases of the 2nd/3rd quadrants.
+		if X.Re < 0.0 then
+			return (Absolute(X), arctan(X.Im / X.Re) + Pi);
+		end if;
 		return (Absolute(X), arctan(X.Im / X.Re));
 	end ToPolar;
 

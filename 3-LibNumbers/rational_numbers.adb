@@ -17,18 +17,12 @@ package body Rational_Numbers is
 	use Ada.Text_IO, Ada.Integer_Text_IO;
 	function "+" (X: Rational) return Rational is
 	begin
-		if X.Num < 0 then
-			return (-X.Num, X.Denom);
-		end if;
 		return X;
 	end "+"; --unary
 
 	function "-" (X: Rational) return Rational is
 	begin
-		if X.Num > 0 then
-			return (-X.Num, X.Denom);
-		end if;
-		return X;
+		return (-X.Num, X.Denom);
 	end "-"; --unary
 
 	function "+" (X, Y: Rational) return Rational is
@@ -47,16 +41,21 @@ package body Rational_Numbers is
 	end "*";
 
 	function "/" (X, Y: Rational) return Rational is
+		N : Integer := X.Num*Y.Denom;
+		D : Integer := X.Denom*Y.Num;
 	begin
-		if (Y.Num /= 0) then
-			return Simplify(((X.Num*Y.Denom), (X.Denom*Y.Num)));
+		if D < 0 then
+			D := -D; -- switch signs so numerator holds negative
+			N := -N;
+		elsif (D = 0) then
+			return (0,1); -- NaN
 		end if;
-		return (999999999,1);
+		return Simplify((N,D));
 	end "/";
 
 	function "/" (X: Integer; Y: Positive) return Rational is -- constructor
 	begin
-		return (X, Y);
+		return Simplify((X, Y));
 	end "/";
 
 	function Numerator (X: Rational) return Integer is

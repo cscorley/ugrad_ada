@@ -31,6 +31,9 @@ begin
 	Print(ToComplex(AP+BP)); New_Line;
 	Print(A-B); New_Line;
 	Print(ToComplex(AP-BP)); New_Line;
+	Put("These next two should be equal.  If not, your reference angles are FUCKED.");New_Line;
+	Print(A-C); New_Line;
+	Print(ToComplex(AP-CP)); New_Line;
 	Print(A*B); New_Line;
 	Print(ToComplex(AP*BP)); New_Line;
 	Print(A/B); New_Line;
