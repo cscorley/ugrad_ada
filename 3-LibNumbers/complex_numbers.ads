@@ -56,7 +56,7 @@ private
 	type Polar is
 	record
 		R: Float;
-		Theta: Float range 0.0..2.0*Pi;
+		Theta: Float range -Pi..Pi;
 	end record;
 	I: constant Complex := (0.0, 1.0);
 end Complex_Numbers;

@@ -161,8 +161,10 @@ package body Complex_Numbers is
 		--R= Absolute(X)
 		--Theta = arctan(X.Im / X.Re)
 		-- watch for special cases of the 2nd/3rd quadrants.
-		if X.Re < 0.0 then
+		if X.Re < 0.0 and then X.Im >= 0.0 then
 			return (Absolute(X), arctan(X.Im / X.Re) + Pi);
+		elsif X.Re < 0.0 and then X.Im < 0.0 then
+			return (Absolute(X), arctan(X.Im / X.Re) - Pi);
 		end if;
 		return (Absolute(X), arctan(X.Im / X.Re));
 	end ToPolar;
