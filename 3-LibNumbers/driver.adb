@@ -27,6 +27,8 @@ begin
 	CP := ToPolar(C);
 	Print(A); New_Line;
 	Print(ToComplex(AP)); New_Line;
+	Print(-A); New_Line;
+	Print(ToComplex(-AP)); New_Line;
 	Print(A+B); New_Line;
 	Print(ToComplex(AP+BP)); New_Line;
 	Print(A-B); New_Line;
