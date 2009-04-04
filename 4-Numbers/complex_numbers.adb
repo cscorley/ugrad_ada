@@ -1,17 +1,16 @@
 --	complex_numbers.adb
 
 --	Chris Corley
---	Assignment 3 - "LibNumbers"
+--	Assignment 4 - "Numbers"
 --	CS390 - Dr. Roden
---	Due Tuesday, March 31, 2009
+--	Due Tuesday, April 7, 2009
 
 --	Purpose:  Body of Complex_Numbers package.  Package handles complex numbers
 --		and the operations upon them, in both polar and rectangular forms.
 
-with Ada.Numerics, Ada.Numerics.Elementary_Functions;
+with Ada.Numerics, Ada.Numerics.Elementary_Functions, Ada.Text_IO, Ada.Float_Text_IO;
 package body Complex_Numbers is
-	use Ada.Numerics, Ada.Numerics.Elementary_Functions;
-
+	use Ada.Numerics, Ada.Numerics.Elementary_Functions, Ada.Text_IO, Ada.Float_Text_IO;
 	-- Complex functions
 	function "+" (X: Complex) return Complex is
 	begin
@@ -72,6 +71,32 @@ package body Complex_Numbers is
 		return Sqrt((X.Re*X.Re) + (X.Im*X.Im));
 	end Absolute;
 
+	procedure Put (X: Complex) is
+	begin
+		Put(Float'Image(X.Re));
+		Put(" +");
+		Put(X.Im);
+		Put(" * i");
+	end Put;
+
+	procedure Put_Line (X: Complex) is
+	begin
+		Put(X);
+		New_Line;
+	end Put_Line;
+
+	procedure Get_Line (X: out Complex) is
+		userEntry : String (1..80) := (others => ' ');
+		length : Natural := 0;
+		slashPos : Natural := 0;
+	begin
+		Get_Line(userEntry, length);
+		for I in userEntry'First..length loop
+			slashPos := I;
+			exit when (userEntry(I) = '+' or userEntry(I) = '-');
+		end loop;
+		X := Cons(Float'Value(userEntry(1..slashPos-1)), Float'Value(userEntry(slashPos+1..length-1)));
+	end Get_Line;
 	-- Polar functions
 	function "+" (X: Polar) return Polar is
 	begin
@@ -130,6 +155,19 @@ package body Complex_Numbers is
 		return X.R;
 	end Absolute;
 
+	procedure Put (X: Polar) is
+	begin
+		Put(X.R);
+		Put(" * cis(");
+		Put(X.Theta);
+		Put(")");
+	end Put;
+
+	procedure Put_Line (X: Polar) is
+	begin
+		Put(X);
+		New_Line;
+	end Put_Line;
 
 	-- Conversion functions
 	function ToPolar (X: Complex) return Polar is

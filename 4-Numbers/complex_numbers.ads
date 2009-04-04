@@ -1,9 +1,9 @@
 --	complex_numbers.ads
 
 --	Chris Corley
---	Assignment 3 - "LibNumbers"
+--	Assignment 4 - "Numbers"
 --	CS390 - Dr. Roden
---	Due Tuesday, March 31, 2009
+--	Due Tuesday, April 7, 2009
 
 --	Purpose:  Specification of Complex_Numbers package.  Package handles complex numbers
 --		and the operations upon them, in both polar and rectangular forms.
@@ -29,6 +29,9 @@ package Complex_Numbers is
 	function Im_Part (X: Complex) return Float;
 	function Conjugate (X: Complex) return Complex;
 	function Absolute (X: Complex) return Float;
+	procedure Put (X: Complex);
+	procedure Put_Line (X: Complex);
+	procedure Get_Line (X: out Complex);
 
 	-- Polar functions
 	function "+" (X: Polar) return Polar;
@@ -42,7 +45,8 @@ package Complex_Numbers is
 	function Theta_Part (X: Polar) return Float;
 	function Conjugate (X: Polar) return Polar;
 	function Absolute (X: Polar) return Float;
-
+	procedure Put (X: Polar);
+	procedure Put_Line (X: Polar);
 	-- Conversion functions
 	function ToPolar (X: Complex) return Polar;
 	function ToComplex (X: Polar) return Complex;

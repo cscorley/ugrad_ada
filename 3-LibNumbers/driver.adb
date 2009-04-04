@@ -5,7 +5,7 @@
 --	CS390 - Dr. Roden
 --	Due Tuesday, March 31, 2009
 
---	Purpose:
+--	Purpose:  Tests the two packages Complex_Numbers and Rational_Numbers
 
 --	Input:
 
@@ -37,7 +37,6 @@ begin
 	Print(A-B); New_Line;
 	Print(ToComplex(AP-BP)); New_Line;
 	New_Line;
-	Put_Line("These next two should be equal.  If not, your reference angles are FUCKED.");
 	Print(A-C); New_Line;
 	Print(ToComplex(AP-CP)); New_Line;
 	New_Line;
