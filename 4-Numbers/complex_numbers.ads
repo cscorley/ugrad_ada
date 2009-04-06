@@ -47,6 +47,7 @@ package Complex_Numbers is
 	function Absolute (X: Polar) return Float;
 	procedure Put (X: Polar);
 	procedure Put_Line (X: Polar);
+
 	-- Conversion functions
 	function ToPolar (X: Complex) return Polar;
 	function ToComplex (X: Polar) return Complex;
