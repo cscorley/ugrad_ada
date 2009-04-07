@@ -5,22 +5,24 @@
 --	CS390 - Dr. Roden
 --	Due Tuesday, April 7, 2009
 
---	Purpose:  Tests the two packages Complex_Numbers and Rational_Numbers
+--	Purpose:  A basic calculator with various operations upon Complex and Rational numbers.
 
---	Input:
+--	Input:  Accepts as input Complex or Rational numbers.
 
---	Output:
+--	Output:  Prints the results of the selected operation upon the input.
 
-with Complex_Numbers, Rational_Numbers, Ada.Text_IO, Ada.Integer_Text_IO, Ada.Float_Text_IO;
+with Complex_Numbers, Rational_Numbers, Ada.Text_IO;
 
+-- Prints a small menu for the user to choose which number type to work with.
 procedure Driver is
-	use Complex_Numbers, Rational_Numbers, Ada.Text_IO, Ada.Integer_Text_IO, Ada.Float_Text_IO;
-	userEntry : String(1..16);
-	length : Natural;
+	use Ada.Text_IO;
+
+	-- Prints the menu and handles interfacing with the Complex_Numbers package.
 	procedure doComplex is
+		use Complex_Numbers;
 		option : Natural := 11;
 		Left, Right : Complex;
-	begin
+	begin -- doComplex
 		loop
 			New_Line;
 			Put_Line("Please select your operation");
@@ -75,10 +77,13 @@ procedure Driver is
 			end if;
 		end loop;
 	end doComplex;
+
+	-- Prints the menu and handles interfacing with the Rational_Numbers package.
 	procedure doRational is
+		use Rational_Numbers;
 		option : Natural := 9;
 		Left, Right : Rational;
-	begin
+	begin -- doRational
 		loop
 			New_Line;
 			Put_Line("Please select your operation");
@@ -129,7 +134,10 @@ procedure Driver is
 			end if;
 		end loop;
 	end doRational;
-begin
+
+	userEntry : String(1..16);
+	length : Natural;
+begin -- Driver
 	Put_Line("What would you like to work with today?");
 	Put_Line("(C)omplex Numbers");
 	Put_Line("(R)ational Numbers");

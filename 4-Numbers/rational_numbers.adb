@@ -8,9 +8,9 @@
 --	Purpose:  Body of Rational_Numbers package.  Package which handles rational
 --		numbers and the operations upon them.
 
-with Ada.Text_IO, Ada.Integer_Text_IO;
+with Ada.Text_IO;
 package body Rational_Numbers is
-	use Ada.Text_IO, Ada.Integer_Text_IO;
+	use Ada.Text_IO;
 	function "+" (X: Rational) return Rational is
 	begin
 		return X;
@@ -82,7 +82,7 @@ package body Rational_Numbers is
 
 	procedure Put (X: Rational) is
 	begin
-		Put(Integer'Image(X.Num));
+		Put(Integer'Image(X.Num));  -- Looks so much cleaner this way.
 		Put("/");
 		Put(Integer'Image(X.Denom));
 	end Put;
@@ -93,18 +93,21 @@ package body Rational_Numbers is
 		New_Line;
 	end Put_Line;
 
+	-- Get_Line will fetch a line from user input and parse it for relevant information.
+	-- Only works when input is in a/b or a\b form!
 	procedure Get_Line (X: out Rational) is
 		userEntry : String (1..80) := (others => ' ');
 		length : Natural := 0;
-		slashPos : Natural := 0;
+		slash : Natural := 0;
 	begin
 		Get_Line(userEntry, length);
 		for I in userEntry'First..length loop
-			slashPos := I;
+			slash := I;
 			exit when (userEntry(I) = '/' or userEntry(I) = '\');
 		end loop;
-		X := Integer'Value(userEntry(1..slashPos-1))/Integer'Value(userEntry(slashPos+1..length));
+		X := Integer'Value(userEntry(1..slash-1))/Integer'Value(userEntry(slash+1..length));
 	end Get_Line;
+
 	-- GCD: Recursively looks for the Greatest Common Divisor between two Integers.
 	function GCD (X,Y: Integer) return Integer is
 	begin

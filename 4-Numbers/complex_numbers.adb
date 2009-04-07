@@ -8,9 +8,9 @@
 --	Purpose:  Body of Complex_Numbers package.  Package handles complex numbers
 --		and the operations upon them, in both polar and rectangular forms.
 
-with Ada.Numerics, Ada.Numerics.Elementary_Functions, Ada.Text_IO, Ada.Float_Text_IO;
+with Ada.Numerics, Ada.Numerics.Elementary_Functions, Ada.Text_IO;
 package body Complex_Numbers is
-	use Ada.Numerics, Ada.Numerics.Elementary_Functions, Ada.Text_IO, Ada.Float_Text_IO;
+	use Ada.Numerics, Ada.Numerics.Elementary_Functions, Ada.Text_IO;
 	-- Complex functions
 	function "+" (X: Complex) return Complex is
 	begin
@@ -73,9 +73,14 @@ package body Complex_Numbers is
 
 	procedure Put (X: Complex) is
 	begin
-		Put(Float'Image(X.Re));
-		Put(" +");
-		Put(X.Im);
+		Put(Float'Image(X.Re)); -- Looks cleaner using Integers, but doesn't do much help other
+					-- than reduce the dependency list here.
+		if (X.Im >= 0.0) then
+			Put(" +");
+		else
+			Put(" ");
+		end if;
+		Put(Float'Image(X.Im));
 		Put(" * i");
 	end Put;
 
@@ -85,6 +90,8 @@ package body Complex_Numbers is
 		New_Line;
 	end Put_Line;
 
+	-- Get_Line will fetch a line from user input and parse it for relevant information.
+	-- Only works when input is in a +- bi form!
 	procedure Get_Line (X: out Complex) is
 		userEntry : String (1..80) := (others => ' ');
 		length,signPos : Natural := 0;
@@ -99,7 +106,7 @@ package body Complex_Numbers is
 			iPos := I;
 			exit when (userEntry(I) = 'i' or userEntry(I) = 'I');
 		end loop;
-		X := Cons(Float'Value(userEntry(1..signPos-1)),Float'Value(userEntry(signPos..iPos-1)));
+		X :=Cons(Float'Value(userEntry(1..signPos-1)),Float'Value(userEntry(signPos..iPos-1)));
 	end Get_Line;
 	-- Polar functions
 	function "+" (X: Polar) return Polar is
@@ -161,9 +168,9 @@ package body Complex_Numbers is
 
 	procedure Put (X: Polar) is
 	begin
-		Put(X.R);
+		Put(Float'Image(X.R));
 		Put(" * cis(");
-		Put(X.Theta);
+		Put(Float'Image(X.Theta));
 		Put(")");
 	end Put;
 

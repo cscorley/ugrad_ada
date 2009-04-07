@@ -7,7 +7,6 @@
 
 --	Purpose:  Specification of Complex_Numbers package.  Package handles complex numbers
 --		and the operations upon them, in both polar and rectangular forms.
-
 with Ada.Numerics;
 
 package Complex_Numbers is
