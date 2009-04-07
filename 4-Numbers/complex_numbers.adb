@@ -87,15 +87,29 @@ package body Complex_Numbers is
 
 	procedure Get_Line (X: out Complex) is
 		userEntry : String (1..80) := (others => ' ');
-		length : Natural := 0;
-		slashPos : Natural := 0;
+		length,signPos, spaceCount : Natural := 0;
+		iPos : Natural := 80;
 	begin
 		Get_Line(userEntry, length);
 		for I in userEntry'First..length loop
-			slashPos := I;
+			signPos := I;
 			exit when (userEntry(I) = '+' or userEntry(I) = '-');
 		end loop;
-		X := Cons(Float'Value(userEntry(1..slashPos-1)), Float'Value(userEntry(slashPos+1..length-1)));
+		for I in signPos+1..length loop
+			iPos := I;
+			if (userEntry(I) = ' ') then
+				spaceCount := spaceCount + 1;
+			end if;
+			exit when (userEntry(I) = 'i' or userEntry(I) = 'I');
+		end loop;
+		if (signPos+1 = iPos) then
+			X := Cons(Float'Value(userEntry(1..signPos-1)), 1.0);
+		elsif (userEntry(signPos+1..iPos-1)'Length = spaceCount) then
+			X := Cons(Float'Value(userEntry(1..signPos-1)), 1.0);
+		else
+			X := Cons(Float'Value(userEntry(1..signPos-1)), Float'Value(userEntry(signPos+1..iPos-1)));
+		end if;
+
 	end Get_Line;
 	-- Polar functions
 	function "+" (X: Polar) return Polar is
