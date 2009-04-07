@@ -87,29 +87,40 @@ package body Complex_Numbers is
 
 	procedure Get_Line (X: out Complex) is
 		userEntry : String (1..80) := (others => ' ');
-		length,signPos, spaceCount : Natural := 0;
+		length,signPos, spaceCountA, spaceCountB : Natural := 0;
+		A, B : Float := 0.0;
 		iPos : Natural := 80;
 	begin
 		Get_Line(userEntry, length);
 		for I in userEntry'First..length loop
 			signPos := I;
+			if (userEntry(I) = ' ') then
+				spaceCountA := spaceCountA + 1;
+			end if;
 			exit when (userEntry(I) = '+' or userEntry(I) = '-');
 		end loop;
 		for I in signPos+1..length loop
 			iPos := I;
 			if (userEntry(I) = ' ') then
-				spaceCount := spaceCount + 1;
+				spaceCountB := spaceCountB + 1;
 			end if;
 			exit when (userEntry(I) = 'i' or userEntry(I) = 'I');
 		end loop;
-		if (signPos+1 = iPos) then
-			X := Cons(Float'Value(userEntry(1..signPos-1)), 1.0);
-		elsif (userEntry(signPos+1..iPos-1)'Length = spaceCount) then
-			X := Cons(Float'Value(userEntry(1..signPos-1)), 1.0);
+		if (userEntry(userEntry'First..signPos-1)'Length = spaceCountA) and
+		   (userEntry(signPos+1..iPos-1)'Length = spaceCountB) then
+			A := 0.0;
+			B := 1.0;
+		elsif (userEntry(userEntry'First..signPos-1)'Length = spaceCountA) then
+			A := 0.0;
+			B := Float'Value(userEntry(signPos+1..iPos-1));
+		elsif (userEntry(signPos+1..iPos-1)'Length = spaceCountB) then
+			A := Float'Value(userEntry(1..signPos-1));
+			B := 1.0;
 		else
-			X := Cons(Float'Value(userEntry(1..signPos-1)), Float'Value(userEntry(signPos+1..iPos-1)));
+			A := Float'Value(userEntry(1..signPos-1));
+			B := Float'Value(userEntry(signPos+1..iPos-1));
 		end if;
-
+		X := Cons(A,B);
 	end Get_Line;
 	-- Polar functions
 	function "+" (X: Polar) return Polar is
