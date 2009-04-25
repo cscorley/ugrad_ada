@@ -25,7 +25,7 @@ procedure Driver is
 	begin -- doComplex
 		loop
 			New_Line;
-			Put_Line("Please select your operation");
+			Put_Line("Please select your operation for Complex");
 			Put_Line(" 1. Set positive (+)");
 			Put_Line(" 2. Set negative (-)");
 			Put_Line(" 3. Add (+)");
@@ -46,35 +46,34 @@ procedure Driver is
 				option := Integer'Value(input);
 			end;
 			exit when option = 0;
-			if option > 0 and option < 11 then
-				New_Line;
-				Put("Your first operand (a + bi form): ");
-				Get_Line(Left);
-				case option is
-					when 3..7 =>
-						New_Line;
-						Put("Your second operand (a + bi form): ");
-						Get_Line(Right);
-					when others => null;
-				end case;
-				case option is
-					when 1 => Put_Line(+Left);
-					when 2 => Put_Line(-Left);
-					when 3 => Put_Line(Left + Right);
-					when 4 => Put_Line(Left - Right);
-					when 5 => Put_Line(Left * Right);
-					when 6 => Put_Line(Left / Right);
-					when 7 => if (Left = Right) then
-							Put_Line("True");
-						else
-							Put_Line("False");
-						end if;
-					when 8 => Put_Line(Conjugate(Left));
-					when 9 => Put_Line(Float'Image(Absolute(Left)));
-					when 10 => Put_Line(ToPolar(Left));
-					when others => null;
-				end case;
-			end if;
+			New_Line;
+			Put("Your first operand (a + bi form): ");
+			Get_Line(Left);
+			case option is
+				when 3..7 =>
+					New_Line;
+					Put("Your second operand (a + bi form): ");
+					Get_Line(Right);
+				when others => null;
+			end case;
+			Put("Solution: ");
+			case option is
+				when 1 => Put_Line(+Left);
+				when 2 => Put_Line(-Left);
+				when 3 => Put_Line(Left + Right);
+				when 4 => Put_Line(Left - Right);
+				when 5 => Put_Line(Left * Right);
+				when 6 => Put_Line(Left / Right);
+				when 7 => if (Left = Right) then
+						Put_Line("Equal");
+					else
+						Put_Line("False");
+					end if;
+				when 8 => Put_Line(Conjugate(Left));
+				when 9 => Put_Line(Float'Image(Absolute(Left)));
+				when 10 => Put_Line(ToPolar(Left));
+				when others => null;
+			end case;
 		end loop;
 	end doComplex;
 
@@ -105,33 +104,32 @@ procedure Driver is
 				option := Integer'Value(input);
 			end;
 			exit when option = 0;
-			if option > 0 and option < 9 then
-				New_Line;
-				Put("Your first operand (a/b form): ");
-				Get_Line(Left);
-				case option is
-					when 3..7 =>
-						New_Line;
-						Put("Your second operand (a/b form): ");
-						Get_Line(Right);
-					when others => null;
-				end case;
-				case option is
-					when 1 => Put_Line(+Left);
-					when 2 => Put_Line(-Left);
-					when 3 => Put_Line(Left + Right);
-					when 4 => Put_Line(Left - Right);
-					when 5 => Put_Line(Left * Right);
-					when 6 => Put_Line(Left / Right);
-					when 7 => if (Left = Right) then
-							Put_Line("True");
-						else
-							Put_Line("False");
-						end if;
-					when 8 => Put_Line(Simplify(Left));
-					when others => null;
-				end case;
-			end if;
+			New_Line;
+			Put("Your first operand (a/b form): ");
+			Get_Line(Left);
+			case option is
+				when 3..7 =>
+					New_Line;
+					Put("Your second operand (a/b form): ");
+					Get_Line(Right);
+				when others => null;
+			end case;
+			Put("Solution: ");
+			case option is
+				when 1 => Put_Line(+Left);
+				when 2 => Put_Line(-Left);
+				when 3 => Put_Line(Left + Right);
+				when 4 => Put_Line(Left - Right);
+				when 5 => Put_Line(Left * Right);
+				when 6 => Put_Line(Left / Right);
+				when 7 => if (Left = Right) then
+						Put_Line("True");
+					else
+						Put_Line("False");
+					end if;
+				when 8 => Put_Line(Simplify(Left));
+				when others => null;
+			end case;
 		end loop;
 	end doRational;
 
