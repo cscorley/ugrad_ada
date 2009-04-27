@@ -11,4 +11,9 @@ package body Stacks.Essentials is
 	begin
 		return 0;
 	end StackSize;
+	procedure Reset(S: in out Stack) is
+	begin
+		S := null;
+		Length := 0;
+	end Reset;
 end Stacks.Essentials;

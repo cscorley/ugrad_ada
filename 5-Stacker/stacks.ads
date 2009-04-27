@@ -10,4 +10,5 @@ private
 		Value: Integer;
 	end record;
 	type Stack is access all Cell;
+	Length : Integer := 0;
 end;
