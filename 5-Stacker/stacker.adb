@@ -70,7 +70,7 @@ procedure Stacker is
 	-- Output: Modified StackItem parameter with the pushed item.
 	procedure pushValue (S: in out StackItem) is
 		input :  String (1..80) := (others => ' ');
-		length : Natural;
+		length : Natural; -- really only here to satisfy the Get_Line call..
 	begin
 		Put("Enter the integer to be pushed onto " & S.Name & ": ");
 		-- This removes everything from the input buffer
