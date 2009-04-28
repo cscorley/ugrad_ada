@@ -8,12 +8,17 @@ package body Stacks.Essentials is
 		return S.Value;
 	end AtTop;
 	function StackSize(S: Stack) return Integer is
+		TempS : Stack := S;
+		Count : Natural := 0;
 	begin
-		return Length;
+		while (TempS /= null) loop
+			Count := Count + 1;
+			TempS := Stack(TempS.Next);
+		end loop;
+		return Count;
 	end StackSize;
 	procedure Reset(S: in out Stack) is
 	begin
 		S := null;
-		Length := 0;
 	end Reset;
 end Stacks.Essentials;

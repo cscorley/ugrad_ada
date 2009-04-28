@@ -5,11 +5,9 @@
 --	CS390 - Dr. Roden
 --	Due Tuesday, April 28, 2009
 
---	Purpose:
+--	Purpose:  Utilizes the Stacks package, allowing the user to perform various operations
+--	on up to 5 different stacks which the user has named.
 
---	Input:
-
---	Output:
 
 with Ada.Text_IO, Ada.Integer_Text_IO;
 with Stacks, Stacks.Essentials;
@@ -17,19 +15,25 @@ with Stacks, Stacks.Essentials;
 procedure Stacker is
 	use Ada.Text_IO, Ada.Integer_Text_IO;
 	use Stacks, Stacks.Essentials;
+
+	MaxStacks : constant Natural := 5;
+
+	-- Our named stacks will be handled by an array of records
 	type StackItem is
 	record
 		Name : Character := ' ';
 		Item : Stack;
 	end record;
-	MaxStacks : constant Natural := 5;
 	StackList : array (1..MaxStacks) of StackItem;
 
 
+	-- Get_Option simply grabs 1 character at a time from the input line, and if it raises
+	--	a constraint_error it will call itself again to refetch input.
+	-- Input: Character type
+	-- Output: Stores the read character into the parameter passed, and will only print to screen
+	--	upon error.
 	procedure Get_Option(X: out Character) is
 		subtype CharLen is Integer range 0..1;
-
-
 		input : String(1..80);
 		length : CharLen := 0;
 	begin
@@ -42,6 +46,11 @@ procedure Stacker is
 			Get_Option(X); -- hopefully they get it right this time.
 	end Get_Option;
 
+	-- createNewStack is to get from user the StackItem's name, and to reset the stack to a new
+	--	blank (null) stack.  Since space and 0 are used for navigating elsewhere, names of
+	--	those two characters is disallowed.
+	-- Input: StackItem type
+	-- Output: Modified StackItem parameter with new name and a blank stack
 	procedure createNewStack (S: in out StackItem) is
 		input : Character;
 	begin
@@ -56,14 +65,30 @@ procedure Stacker is
 		end if;
 	end createNewStack;
 
+	-- pushValue utilizes the Stack packages Push procedure and pushes a read value to the stack.
+	-- Input: StackItem type
+	-- Output: Modified StackItem parameter with the pushed item.
 	procedure pushValue (S: in out StackItem) is
-		input : Integer;
+		input :  String (1..80) := (others => ' ');
+		length : Natural;
 	begin
 		Put("Enter the integer to be pushed onto " & S.Name & ": ");
-		Get(input);
-		Push(S.Item, input);
+		-- This removes everything from the input buffer
+		Get_Line(input,length);
+		-- and this will raise an exception if what was in that buffer is bad.
+		Push(S.Item, Integer'Value(input));
+	exception
+		when DATA_ERROR | CONSTRAINT_ERROR =>
+			Put_Line("[!] Only integers can be pushed onto the stack.");
+			New_Line;
+			pushValue(S);
 	end pushValue;
 
+	-- popValue utilizes the Stack packages Pop procedure and pops a value from the stack and
+	--	prints it to screen.  This proceure relies on the Stacks.Essentials child package
+	--	to check for an empty stack on error.
+	-- Input: StackItem type
+	-- Output: Modified StackItem parameter without the popped item. Prints to screen the value.
 	procedure popValue (S: in out StackItem) is
 		output : Integer;
 	begin
@@ -78,7 +103,10 @@ procedure Stacker is
 			end if;
 	end popValue;
 
-	procedure emptyCheck (S: in out StackItem) is
+	-- emptyCheck relies on the Stacks.Essentials package to check if the stack is empty.
+	-- Input: StackItem type
+	-- Output: Prints to screen if the stack is empty.
+	procedure emptyCheck (S: in StackItem) is
 	begin
 		if (IsEmpty(S.Item)) then
 			Put(S.Name & " is empty.");
@@ -87,12 +115,20 @@ procedure Stacker is
 		end if;
 	end emptyCheck;
 
-	procedure displaySize (S: in out StackItem) is
+	-- displaySize relies on the Stacks.Essentials package to output the number of items in the
+	--	given stack
+	-- Input: StackItem type
+	-- Output: Prints to screen the size of the stack.
+	procedure displaySize (S: in StackItem) is
 	begin
 		Put(S.Name & " has" & Integer'Image(StackSize(S.Item)) & " integers.");
 	end;
 
-
+	-- stackMenu is our main interface with the user, and calls all of the above helper procedures
+	--	when a user selects an option from here.  Note, this must remain 'in out' due to
+	--	helper functions needing to modify the StackItem
+	-- Input: StackItem type
+	-- Output: Prints the screen a basic menu for stack operations.
 	procedure stackMenu(S: in out StackItem) is
 		option : Character := ' ';
 	begin
@@ -100,10 +136,11 @@ procedure Stacker is
 		loop
 			WorkerLoop:
 			loop
+				New_Line;
+				Put_Line("[*] Stacker - Stack Operation");
 				if S.Name /= ' ' then
-					New_Line;
 					Put_Line("What would you like to do to " & S.Name & "?");
-					Put_Line(" 1. Create/Name new stack");
+					Put_Line(" 1. Replace stack with a new stack");
 					Put_Line(" 2. Push integer to stack");
 					Put_Line(" 3. Pop integer from stack");
 					Put_Line(" 4. Check for empty stack");
@@ -115,6 +152,8 @@ procedure Stacker is
 						exit BossLoop when option = '0';
 					exception
 						when CONSTRAINT_ERROR => exit WorkerLoop;
+						-- this will cause us to simply 'skip' the rest of the
+						--\loop if any mishaps occur.
 					end;
 					New_Line;
 				else
@@ -140,6 +179,10 @@ procedure Stacker is
 		New_Line;
 	end stackMenu;
 
+	-- listNames helps our main Stacker procedure by printing out the list of names until we
+	--	reach a blank stack (denoted by having a space for the Name).
+	-- Input: <none>
+	-- Output: Prints to screen the Names of stacks
 	procedure listNames is
 	begin
 		for I in 1..MaxStacks loop
@@ -148,6 +191,11 @@ procedure Stacker is
 		end loop;
 	end listNames;
 
+	-- verifyName helps our main Stacker procedure by returning the position in our array the
+	--	stack name given is located.  If it cannot be found, it raises a DATA_ERROR.
+	-- Input: Character name value
+	-- Output: <none>
+	-- Return: Integer position of stack in array
 	function verifyName (Name : Character) return Integer is
 	begin
 		for I in 1..MaxStacks loop
@@ -155,27 +203,38 @@ procedure Stacker is
 				return I;
 			end if;
 		end loop;
-		raise CONSTRAINT_ERROR;
+		raise DATA_ERROR;
 	end verifyName;
 
-	function stackCount return Integer is
-		temp : Integer;
+	-- freeStackCount helps our main Stacker procedure by returning the number of free (blank/empty)
+	--	stacks in the array.
+	-- Input: <none>
+	-- Output: <none>
+	-- Return: Integer count of free stacks in array
+	function freeStackCount return Integer is
+		temp : Integer := MaxStacks;
 	begin
-		for I in reverse 1..MaxStacks loop
-			temp := I;
+		for I in 1..MaxStacks loop
 			exit when StackList(I).Name = ' ';
+			temp := temp - 1;
 		end loop;
 		return temp;
-	end stackCount;
+	end freeStackCount;
 
-begin
+begin -- Stacker
 	BossLoop:
 	loop
 		WorkerLoop:
 		loop
+			Put_Line("[*] Stacker - Main");
+		if freeStackCount = MaxStacks then
+			New_Line;
+			Put_Line("No previous stacks found, proceeding to create new stack...");
+			stackMenu(StackList(1));
+		else
 			Put_Line("Which stack would you like to work with today? (0 to exit)");
 			Put_Line("Enter a space to use the first unused stack.");
-			Put_Line("Available stacks (" & Integer'Image(stackCount) & " free): ");
+			Put_Line("Available stacks (" & Integer'Image(freeStackCount) & " free): ");
 			listNames;
 			New_Line;
 			Put("Your selection: ");
@@ -183,14 +242,15 @@ begin
 				option : Character;
 				SelectedStack : Positive;
 			begin
-				Get_Option(option); -- this really needs to be a Get_Line
+				Get_Option(option);
 				exit BossLoop when option = '0';
 				SelectedStack := verifyName(option);
 				New_Line;
 				stackMenu(StackList(SelectedStack));
 			exception
-				when CONSTRAINT_ERROR => exit WorkerLoop;
+				when CONSTRAINT_ERROR | DATA_ERROR => exit WorkerLoop;
 			end;
+		end if;
 		end loop WorkerLoop;
 		New_Line(2);
 	end loop BossLoop;
