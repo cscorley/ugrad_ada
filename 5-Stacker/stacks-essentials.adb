@@ -9,7 +9,7 @@ package body Stacks.Essentials is
 	end AtTop;
 	function StackSize(S: Stack) return Integer is
 	begin
-		return 0;
+		return Length;
 	end StackSize;
 	procedure Reset(S: in out Stack) is
 	begin
