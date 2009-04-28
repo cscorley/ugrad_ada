@@ -1,3 +1,7 @@
+--	stacks-push.adb
+
+--	The implementation of the Pop procedure
+
 separate (Stacks)
 procedure Pop(S: in out Stack; X: out Integer) is
 begin

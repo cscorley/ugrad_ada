@@ -1,3 +1,7 @@
+--	stacks-essentials.ads
+
+--	The specification for the Stacks.Essentials child package.
+
 package Stacks.Essentials is
 	function IsEmpty(S: Stack) return Boolean;
 	function AtTop(S: Stack) return Integer;

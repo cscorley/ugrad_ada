@@ -26,7 +26,6 @@ procedure Stacker is
 	end record;
 	StackList : array (1..MaxStacks) of StackItem;
 
-
 	-- Get_Option simply grabs 1 character at a time from the input line, and if it raises
 	--	a constraint_error it will call itself again to refetch input.
 	-- Input: Character type
@@ -45,6 +44,9 @@ procedure Stacker is
 			Put("Your selection: ");
 			Get_Option(X); -- hopefully they get it right this time.
 	end Get_Option;
+
+
+	-- stackMenu helper procedures
 
 	-- createNewStack is to get from user the StackItem's name, and to reset the stack to a new
 	--	blank (null) stack.  Since space and 0 are used for navigating elsewhere, names of
@@ -83,6 +85,14 @@ procedure Stacker is
 			New_Line;
 			pushValue(S);
 	end pushValue;
+
+
+
+
+
+
+
+
 
 	-- popValue utilizes the Stack packages Pop procedure and pops a value from the stack and
 	--	prints it to screen.  This proceure relies on the Stacks.Essentials child package
@@ -124,6 +134,14 @@ procedure Stacker is
 		Put(S.Name & " has" & Integer'Image(StackSize(S.Item)) & " integers.");
 	end;
 
+
+
+
+
+
+
+
+
 	-- stackMenu is our main interface with the user, and calls all of the above helper procedures
 	--	when a user selects an option from here.  Note, this must remain 'in out' due to
 	--	helper functions needing to modify the StackItem
@@ -160,24 +178,20 @@ procedure Stacker is
 					option := '1'; -- force to name the new stack first
 				end if;
 				case option is
-					when '1' =>
-						createNewStack(S);
-					when '2' =>
-						pushValue(S);
-					when '3' =>
-						popValue(S);
-					when '4' =>
-						emptyCheck(S);
-					when '5' =>
-						displaySize(S);
-					when others =>
-						Put_Line("[!] Not valid, please enter again.");
+					when '1' => createNewStack(S);
+					when '2' => pushValue(S);
+					when '3' => popValue(S);
+					when '4' => emptyCheck(S);
+					when '5' => displaySize(S);
+					when others => Put_Line("[!] Not valid, please enter again.");
 				end case;
 				option := ' ';
 			end loop WorkerLoop;
 		end loop BossLoop;
 		New_Line;
 	end stackMenu;
+
+	-- Main Stacker helper procedures
 
 	-- listNames helps our main Stacker procedure by printing out the list of names until we
 	--	reach a blank stack (denoted by having a space for the Name).
@@ -206,7 +220,7 @@ procedure Stacker is
 		raise DATA_ERROR;
 	end verifyName;
 
-	-- freeStackCount helps our main Stacker procedure by returning the number of free (blank/empty)
+	-- freeStackCount helps our main Stacker procedure by returning the number of free (empty)
 	--	stacks in the array.
 	-- Input: <none>
 	-- Output: <none>
@@ -220,6 +234,9 @@ procedure Stacker is
 		end loop;
 		return temp;
 	end freeStackCount;
+
+
+
 
 begin -- Stacker
 	BossLoop:
